@@ -4,31 +4,50 @@ import "fmt"
 
 // for debuggin purposes
 func main() {
-	test := []int{10, 1, 2, 3, 4, 5}
-	fmt.Println(almostIncreasingSequence(test))
+	// test1 := [][]int{
+	// 	{1, 0, 3},
+	// 	{0, 2, 1},
+	// 	{1, 2, 0},
+	// }
+	// test2 := [][]int{
+	// 	{1, 1, 1, 1},
+	// 	{0, 5, 0, 0},
+	// 	{2, 1, 3, 10},
+	// }
+	test3 := [][]int{
+		{1, 1, 1, 0},
+		{0, 5, 0, 1},
+		{2, 1, 3, 10},
+	}
+	// fmt.Println(matrixElementsSum(tes1))
+	// fmt.Println(matrixElementsSum(test2))
+	fmt.Println(matrixElementsSum(test3))
 }
 
-func almostIncreasingSequence(sequence []int) bool {
-	max := sequence[0]
-	maxIndex := 0
-	for i, num := range sequence {
-		if max < num {
-			max = num
-			maxIndex = i
-		}
-	}
-	for i := 0; i < len(sequence)-1; i++ {
-		if i == maxIndex {
+func matrixElementsSum(matrix [][]int) int {
+	sumCost, sumCostPerColumn := 0, 0
+	buildingLen, officeLen := len(matrix), len(matrix[0])
+	i, j := buildingLen-1, officeLen-1
+	for j >= 0 {
+		currentOffice := matrix[i][j]
+		if i == 0 {
+			if currentOffice == 0 {
+				sumCost -= sumCostPerColumn
+			} else {
+				sumCost += currentOffice
+			}
+			j--
+			i = buildingLen - 1
+			sumCostPerColumn = 0
 			continue
 		}
-		if i+1 == maxIndex {
-			if sequence[i+1] >= sequence[i+2] {
-				return false
-			}
+		officeUp := matrix[i-1][j]
+		if officeUp != 0 {
+			sumCost += currentOffice
+			sumCostPerColumn += currentOffice
 		}
-		if sequence[i] >= sequence[i+1] {
-			return false
-		}
+		// jump up to the office level
+		i--
 	}
-	return true
+	return sumCost
 }
