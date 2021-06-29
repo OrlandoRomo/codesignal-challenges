@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// for debuggin purposes
+// for debugging purposes
 func main() {
 	// test1 := [][]int{
 	// 	{1, 0, 3},
