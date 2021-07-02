@@ -17,6 +17,7 @@ func matrixElementsSum(matrix [][]int) int {
 	i, j := buildingLen-1, officeLen-1
 	for j >= 0 {
 		currentOffice := matrix[i][j]
+		// Last level of the building
 		if i == 0 {
 			if currentOffice == 0 {
 				sumCost -= sumCostPerColumn
