@@ -14,14 +14,14 @@ func reverseInParentheses(inputString string) string {
 	i, left, right, length := 0, -1, -1, len(chars)
 	var stack []string
 	for i < length {
-		if isOpened(chars[i]) {
+		if string(chars[i]) == "(" {
 			left = i
 			i++
 			stack = nil
 			continue
 		}
 		if left != -1 {
-			if isClosed(chars[i]) {
+			if string(chars[i]) == ")" {
 				right = i
 				reverse := reverseString(stack)
 				inputString = strings.ReplaceAll(inputString, inputString[left:right+1], reverse)
@@ -34,13 +34,6 @@ func reverseInParentheses(inputString string) string {
 		i++
 	}
 	return string(chars)
-}
-func isOpened(r rune) bool {
-	return r == 40
-}
-
-func isClosed(r rune) bool {
-	return r == 41
 }
 
 func reverseString(s []string) string {

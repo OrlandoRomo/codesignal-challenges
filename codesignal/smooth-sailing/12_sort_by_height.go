@@ -12,13 +12,10 @@ func sortByHeight(a []int) []int {
 	n := len(a)
 	for i := 0; i < n-1; i++ {
 		for j := i + 1; j < n; j++ {
-			if a[i] == -1 {
+			if a[i] != 1 {
 				break
 			}
-			if a[j] == -1 {
-				continue
-			}
-			if a[i] > a[j] {
+			if a[i] > a[j] && a[j] != -1 {
 				a[i], a[j] = a[j], a[i]
 			}
 		}
