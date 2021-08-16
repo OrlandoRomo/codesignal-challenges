@@ -7,11 +7,6 @@ func main() {
 }
 
 func findEmailDomain(address string) string {
-	l := len(address)
-	index := strings.Index(address, "@")
-	address = address[index+1 : l]
-	if strings.Count(address, "@") >= 1 {
-		return findEmailDomain(address)
-	}
-	return address
+	domains := strings.Split(address, "@")
+	return domains[len(domains)-1]
 }
