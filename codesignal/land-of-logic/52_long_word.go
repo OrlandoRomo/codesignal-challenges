@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"regexp"
-	"strings"
 )
 
 func main() {
@@ -11,14 +10,13 @@ func main() {
 }
 
 func longestWord(text string) string {
-	regex := regexp.MustCompile(`[^a-zA-Z ]+`)
-	strs := strings.Split(regex.ReplaceAllString(text, ""), " ")
-	maxStr := ""
-	//O(N)
-	for _, str := range strs {
-		if len(str) > len(maxStr) {
-			maxStr = str
+	longest := ""
+	regex := regexp.MustCompile("[A-Za-z]+")
+	matches := regex.FindAllString(text, -1)
+	for _, match := range matches {
+		if len(match) > len(longest) {
+			longest = match
 		}
 	}
-	return maxStr
+	return longest
 }
