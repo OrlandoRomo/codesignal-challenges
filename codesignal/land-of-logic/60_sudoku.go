@@ -28,24 +28,14 @@ func sudoku(grid [][]int) bool {
 			}
 		}
 	}
-	// Rows
+	// Rows, Columns
 	for i := 0; i <= 8; i++ {
-		sum := 0
+		row, col := 0, 0
 		for j := 0; j <= 8; j++ {
-			sum += grid[i][j]
+			row += grid[i][j]
+			col += grid[j][i]
 		}
-		if sum != 45 {
-			return false
-		}
-	}
-
-	// Columns
-	for i := 0; i <= 8; i++ {
-		sum := 0
-		for j := 0; j <= 8; j++ {
-			sum += grid[j][i]
-		}
-		if sum != 45 {
+		if row != 45 || col != 45 {
 			return false
 		}
 	}
