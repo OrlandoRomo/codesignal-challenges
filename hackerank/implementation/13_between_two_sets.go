@@ -11,18 +11,27 @@ func main() {
 }
 
 func getTotalX(a []int32, b []int32) int32 {
-	mcmA := getMCM(a, len(a))
-	mcdB, counter := b[0], 0
-	for i := 1; i < len(b); i++ {
-		mcdB = getMCD(b[i], mcdB)
-	}
-
-	for i := mcmA; i <= int(mcdB); i += mcmA {
-		if int(mcdB)%i == 0 {
-			counter++
+	r := make([]int32, 0, 10)
+	for i := a[len(a)-1]; i <= b[0]; i++ {
+		j := 0
+		for ; j < len(a); j++ {
+			if i%a[j] != 0 {
+				break
+			}
+		}
+		if j == len(a) {
+			k := 0
+			for ; k < len(b); k++ {
+				if b[k]%i != 0 {
+					break
+				}
+			}
+			if k == len(b) {
+				r = append(r, i)
+			}
 		}
 	}
-	return int32(counter)
+	return int32(len(r))
 }
 
 // Get the mínimo común multiple using the Euclides algorithm
