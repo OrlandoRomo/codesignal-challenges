@@ -1,20 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	fmt.Println(sockMerchant(7, []int32{1, 2, 1, 2, 1, 3, 2}))
+	fmt.Println(solution("Yo soy tu padre BUAJAJA y se me olvidaba decirte que h"))
 }
 
-// Big O(1)
-func sockMerchant(n int32, ar []int32) int32 {
-	socks := make(map[int32]int32)
-	var counter int32
-	for _, color := range ar {
-		socks[color]++
-		if socks[color]%2 == 0 {
-			counter++
-		}
+func solution(text string) string {
+	chars := strings.Split(text, " ")
+	for i, ch := range chars {
+		chars[i] = encode(ch)
 	}
-	return counter
+	return strings.Join(chars, " ")
+}
+
+func encode(text string) string {
+	if len(text) == 1 {
+		return " "
+	}
+
+	if len(text) <= 3 {
+		return text
+	}
+
+	chars, length := len(text)-2, len(text)
+
+	return fmt.Sprintf("%v%v%v", string(text[0]), chars, string(text[length-1]))
 }
